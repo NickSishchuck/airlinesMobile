@@ -5,12 +5,16 @@ import 'package:airline_app/services/auth_service.dart';
 import 'package:airline_app/screens/auth/login_screen.dart';
 import 'package:airline_app/screens/flight/search_screen.dart';
 import 'package:airline_app/theme/app_theme.dart';
+import 'package:airline_app/services/ticket_service.dart';
+import 'package:airline_app/services/flight_service.dart';
 
 void main() {
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthService()),
+        ChangeNotifierProvider(create: (_) => TicketService()),
+        ChangeNotifierProvider(create: (_) => FlightService()), // Add this too as it's used in multiple screens
       ],
       child: const MyApp(),
     ),

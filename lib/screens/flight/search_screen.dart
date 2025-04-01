@@ -119,7 +119,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   // Origin Field
                   CustomTextField(
                     controller: _originController,
-                    hintText: 'Город відправки',
+                    hintText: 'Місто відправки',
                     prefixIcon: const Icon(Icons.flight_takeoff),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -133,7 +133,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   // Destination Field
                   CustomTextField(
                     controller: _destinationController,
-                    hintText: 'Город прибытия',
+                    hintText: 'Місто прибуття',
                     prefixIcon: const Icon(Icons.flight_land),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -197,7 +197,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(12),
                             ),
-                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
                             child: Row(
                               children: [
                                 Icon(
@@ -205,7 +205,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                   color: Colors.grey[600],
                                 ),
                                 const SizedBox(width: 8),
-                                Expanded(
+                                const Expanded(
                                   child: Text(
                                     'За датою',
                                     style: TextStyle(

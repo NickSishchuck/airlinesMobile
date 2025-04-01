@@ -54,6 +54,41 @@ class TicketService with ChangeNotifier {
     }
   }
 
+  // Future<List<Ticket>> getTicketsByPassenger(int passengerId) async {
+  //   try {
+  //     // Log the request details for debugging
+  //     print("Fetching tickets for passenger ID: $passengerId");
+  //
+  //     final response = await _apiService.get('/tickets/passenger/$passengerId');
+  //
+  //     // Log response for debugging
+  //     print("Ticket response received: ${response.toString()}...");
+  //
+  //     final List<dynamic> ticketsJson = response['data'] ?? [];
+  //
+  //     // If no tickets are found, return an empty list instead of throwing an error
+  //     if (ticketsJson.isEmpty) {
+  //       print("No tickets found for passenger $passengerId");
+  //       _tickets = [];
+  //       notifyListeners();
+  //       return [];
+  //     }
+  //
+  //     _tickets = ticketsJson.map((json) => Ticket.fromJson(json)).toList();
+  //     notifyListeners();
+  //     return _tickets!;
+  //   } catch (e) {
+  //     // Enhanced error handling with more detailed messages
+  //     print("Error fetching tickets: $e");
+  //     if (e.toString().contains("Not authorized")) {
+  //       throw Exception("You don't have permission to access these tickets. This may be because your account doesn't have any tickets or you need to log in again.");
+  //     } else {
+  //       throw Exception("Failed to load tickets: $e");
+  //     }
+  //   }
+  // }
+  //TODO Change the debug variant
+
   Future<List<Ticket>> getTicketsByPassenger(int passengerId) async {
     try {
       final response = await _apiService.get('/tickets/passenger/$passengerId');

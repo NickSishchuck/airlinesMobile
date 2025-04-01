@@ -183,7 +183,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                           onPressed: _login,
                                           isLoading: _isLoading,
                                         ),
-                                        const SizedBox(height: 16),
+                                        const SizedBox(height: 10),
                                         TextButton(
                                           onPressed: () {
                                             Navigator.push(
@@ -238,7 +238,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                           onPressed: _login,
                                           isLoading: _isLoading,
                                         ),
-                                        const SizedBox(height: 16),
+                                        const SizedBox(height: 10),
                                         TextButton(
                                           onPressed: () {
                                             Navigator.push(

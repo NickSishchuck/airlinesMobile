@@ -6,6 +6,7 @@ import 'package:airline_app/widgets/ticket_card.dart';
 import 'package:airline_app/screens/flight/search_screen.dart';
 import 'package:airline_app/screens/flight/flight_board_screen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:airline_app/screens/auth/login_screen.dart';
 
 class TicketListScreen extends StatefulWidget {
   const TicketListScreen({Key? key}) : super(key: key);
@@ -39,20 +40,29 @@ class _TicketListScreenState extends State<TicketListScreen> with SingleTickerPr
     try {
       final authService = Provider.of<AuthService>(context, listen: false);
       final ticketService = Provider.of<TicketService>(context, listen: false);
-      
+
+      // Make sure we're authenticated first
+      bool isAuthenticated = await authService.isAuthenticated();
+
+      if (!isAuthenticated) {
+        // If not authenticated, redirect to login
+        if (mounted) {
+          Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => const LoginScreen()),
+                (route) => false,
+          );
+        }
+        return;
+      }
+
+      // Force refresh user info before proceeding
+      await authService.getCurrentUser();
       final user = authService.currentUser;
+
       if (user != null && user.userId != null) {
         await ticketService.getTicketsByPassenger(user.userId!);
       } else {
-        // If user is not available, try to get their info
-        await authService.getCurrentUser();
-        final updatedUser = authService.currentUser;
-        
-        if (updatedUser != null && updatedUser.userId != null) {
-          await ticketService.getTicketsByPassenger(updatedUser.userId!);
-        } else {
-          throw Exception('Не вдалося отримати інформацію про користувача');
-        }
+        throw Exception('Не вдалося отримати інформацію про користувача');
       }
     } catch (e) {
       Fluttertoast.showToast(
